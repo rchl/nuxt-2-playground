@@ -1,5 +1,9 @@
 /** @type {import('@nuxt/types').NuxtConfig} */
 const config = {
+  server: {
+    port: 9000
+  },
+
   // This should be typed properly.
   sentry: {},
 
