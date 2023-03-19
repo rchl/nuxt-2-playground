@@ -25,14 +25,18 @@
     },
     "types": [
       "@nuxt/types",
+      "@nuxt/typescript-build",
       "@nuxtjs/sentry",
       "@types/node",
-      "less"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
+  "vueCompilerOptions": {
+    "target": 2.7,
+    "strictTemplates": true
+  }
 }

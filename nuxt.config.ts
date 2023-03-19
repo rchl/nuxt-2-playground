@@ -1,9 +1,11 @@
-/** @type {import('@nuxt/types').NuxtConfig} */
-const config = {
-  server: {
-    port: 9000
-  },
+import type { NuxtConfig } from '@nuxt/types'
 
+// import consola, { JSONReporter } from 'consola'
+// consola.setReporters([
+//   new JSONReporter(),
+// ])
+
+const config: NuxtConfig = {
   // This should be typed properly.
   sentry: {},
 
@@ -11,7 +13,10 @@ const config = {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build'
-  ]
+  ],
+
+  typescript: {
+  }
 }
 
 export default config
