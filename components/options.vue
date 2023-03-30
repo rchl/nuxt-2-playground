@@ -1,16 +1,20 @@
 <template>
   <div>
-    <Header />
-    <options :array-prop="[1]" />
-    index
+    {{ arrayProp }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   name: 'IndexPage',
+  props: {
+    arrayProp: {
+      type: Array as PropType<number[]>,
+      default: []
+    }
+  },
   asyncData (context) {
     return {
       asyncDataProperty: 'abc'
@@ -23,7 +27,12 @@ export default defineComponent({
   },
   created () {
     // console.info(this.asyncDataProperty)
-    // console.info(this.normalDataProperty)
+    console.info(this.normalDataProperty)
   },
+  computed: {
+    arrayProperty(): number[] {
+      return this.arrayProp
+    }
+  }
 })
 </script>

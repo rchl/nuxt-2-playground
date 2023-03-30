@@ -1,12 +1,10 @@
 <template>
   <div>
-    <Header />
-    <options :array-prop="[1]" />
-    index
+    {{ asyncDataProperty }}
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -22,8 +20,8 @@ export default defineComponent({
     }
   },
   created () {
-    // console.info(this.asyncDataProperty)
-    // console.info(this.normalDataProperty)
-  },
+    console.info(this.asyncDataProperty)
+    console.info(this.normalDataProperty)
+  }
 })
 </script>

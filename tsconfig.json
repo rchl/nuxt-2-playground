@@ -10,6 +10,7 @@
     ],
     "esModuleInterop": true,
     "allowJs": true,
+    "checkJs": true,
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
@@ -28,15 +29,17 @@
       "@nuxt/typescript-build",
       "@nuxtjs/sentry",
       "@types/node",
+      "./types"
     ]
   },
   "exclude": [
     "node_modules",
     ".nuxt",
-    "dist"
+    "dist",
   ],
   "vueCompilerOptions": {
     "target": 2.7,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "experimentalAdditionalLanguageModules": ["./generate-types.js"]
   }
 }
