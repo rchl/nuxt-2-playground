@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Header />
-    <options :array-prop="[1]" />
-    index
+    Foo
+    {{ normalDataProperty }}
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
+<script>
+export default {
   name: 'IndexPage',
-  asyncData (context) {
+  asyncData (/* { $axios } */) {
+    // const response = await $axios.get('http://tidal.com')
+    // console.info(response.data)
+
     return {
       asyncDataProperty: 'abc'
     }
@@ -28,7 +28,6 @@ export default defineComponent({
   },
   created () {
     // console.info(this.asyncDataProperty)
-    // console.info(this.normalDataProperty)
-  },
-})
+  }
+}
 </script>

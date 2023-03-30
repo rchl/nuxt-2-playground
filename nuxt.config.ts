@@ -6,10 +6,19 @@ import type { NuxtConfig } from '@nuxt/types'
 // ])
 
 const config: NuxtConfig = {
+  server: {
+    port: 9000
+  },
+
   components: true,
 
   // This should be typed properly.
-  sentry: {},
+  sentry: {
+    dsn: '123',
+    config: {
+      debug: true
+    }
+  },
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -17,6 +26,18 @@ const config: NuxtConfig = {
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
   ],
+
+  modules: [
+    '@nuxtjs/axios'
+  ],
+
+  plugins: [
+    // '~/plugins/test-axios.ts'
+  ],
+
+  serverMiddleware: [
+    // '~/api/test.ts'
+  ]
 
   typescript: {
     // typeCheck: false

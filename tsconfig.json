@@ -27,11 +27,16 @@
     "types": [
       "@nuxt/types",
       "@nuxt/typescript-build",
+      "@nuxtjs/axios",
       "@nuxtjs/sentry",
       "@types/node",
       "./types"
     ]
   },
+  "include": [
+    "nuxt.config.ts",
+    "pages/**/*"
+  ],
   "exclude": [
     "node_modules",
     ".nuxt",
