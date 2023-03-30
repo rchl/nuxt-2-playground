@@ -10,15 +10,15 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
-  setup() {
+  setup () {
     return {
       data: {
         pages: [
           { title: 'Title 1', to: 'To 1' },
-          { title: 'Title 2', to: 'To 2' },
-        ],
-      },
+          { title: 'Title 2', to: 'To 2' }
+        ]
+      }
     }
-  },
+  }
 })
 </script>

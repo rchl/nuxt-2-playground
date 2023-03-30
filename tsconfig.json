@@ -34,8 +34,10 @@
     ]
   },
   "include": [
+    "./auto-import.d.ts",
     "nuxt.config.ts",
-    "pages/**/*"
+    "components/**/*",
+    "pages/**/*",
   ],
   "exclude": [
     "node_modules",

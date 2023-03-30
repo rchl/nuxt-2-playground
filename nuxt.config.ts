@@ -24,7 +24,7 @@ const config: NuxtConfig = {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
-    '@nuxtjs/composition-api/module',
+    '@nuxtjs/composition-api/module'
   ],
 
   modules: [
@@ -37,7 +37,7 @@ const config: NuxtConfig = {
 
   serverMiddleware: [
     // '~/api/test.ts'
-  ]
+  ],
 
   typescript: {
     // typeCheck: false
