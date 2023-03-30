@@ -29,7 +29,7 @@ export default defineComponent({
     dataProperty (): number {
       return this.normalDataProperty
     },
-    boolProperty(): boolean {
+    boolProperty (): boolean {
       // Typed as "any"
       return this.boolProp
     }

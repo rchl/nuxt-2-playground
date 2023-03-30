@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button disabled></button>
+    <button disabled />
     {{ arrayPropertyGetter }}
     {{ boolPropertyGetter }}
     {{ normalDataProperty }}
@@ -12,7 +12,7 @@
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-  name: 'IndexWithObjectProps.vue',
+  name: 'IndexWithObjectProps',
   props: {
     arrayProperty: {
       type: Array as PropType<number[]>,
@@ -21,7 +21,7 @@ export default defineComponent({
     boolProperty: {
       type: Boolean,
       required: true
-    },
+    }
   },
   asyncData (context) {
     return {
@@ -34,10 +34,10 @@ export default defineComponent({
     }
   },
   computed: {
-    arrayPropertyGetter(): number[] {
+    arrayPropertyGetter (): number[] {
       return this.arrayProperty
     },
-    boolPropertyGetter(): boolean {
+    boolPropertyGetter (): boolean {
       return this.boolProperty
     },
     dataProperty (): number {

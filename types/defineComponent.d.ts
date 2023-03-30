@@ -1,4 +1,3 @@
-
 import { Context } from '@nuxt/types'
 import type { Data, HasDefined } from 'vue/types/common'
 import type { ComponentOptionsMixin, ComputedOptions, ComponentOptionsBase, MethodOptions } from 'vue/types/v3-component-options'
@@ -19,7 +18,6 @@ type DefaultProps = Record<string, any>
 type DefaultMethods<V> = { [key: string]: (this: V, ...args: any[]) => any }
 type DefaultComputed = { [key: string]: any }
 type DefaultAsyncData = ((context: Context) => Promise<object | void> | object | void)
-
 
 declare module 'vue/types' {
   /**
@@ -159,7 +157,6 @@ declare module 'vue/types' {
     Emits
   >
 }
-
 
 export type ComponentOptionsWithPropsAndAsyncData<
   PropsOptions = ComponentPropsOptions,

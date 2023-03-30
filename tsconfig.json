@@ -30,7 +30,6 @@
       "@nuxtjs/axios",
       "@nuxtjs/sentry",
       "@types/node",
-      "./types"
     ]
   },
   "include": [
@@ -38,6 +37,7 @@
     "nuxt.config.ts",
     "components/**/*",
     "pages/**/*",
+    "types/**/*",
   ],
   "exclude": [
     "node_modules",
