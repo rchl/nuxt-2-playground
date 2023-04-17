@@ -1,4 +1,5 @@
 import { Context } from '@nuxt/types'
+import type { MetaInfo } from 'vue-meta'
 import type { Data, HasDefined } from 'vue/types/common'
 import type { ComponentOptionsMixin, ComputedOptions, ComponentOptionsBase, MethodOptions } from 'vue/types/v3-component-options'
 import type { ComponentPropsOptions, ExtractDefaultPropTypes, ExtractPropTypes } from 'vue/types/v3-component-props'
@@ -20,6 +21,10 @@ type DefaultComputed = { [key: string]: any }
 type DefaultAsyncData = ((context: Context) => Promise<object | void> | object | void)
 
 declare module 'vue/types' {
+  export interface ComponentCustomOptions {
+    head?: MetaInfo | (() => MetaInfo)
+  }
+
   /**
    * overload 1: object format with no props
    */

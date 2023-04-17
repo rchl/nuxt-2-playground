@@ -25,6 +25,7 @@
       ]
     },
     "types": [
+      "./auto-import.d.ts",
       "@nuxt/types",
       "@nuxt/typescript-build",
       "@nuxtjs/axios",

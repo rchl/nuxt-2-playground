@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <HeaderTest />
     <options :array-prop="[1]" />
     index
   </div>
@@ -11,7 +11,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'IndexPage',
-  asyncData (context) {
+  asyncData (/* context */) {
     return {
       asyncDataProperty: 'abc'
     }
@@ -29,6 +29,6 @@ export default defineComponent({
   created () {
     // console.info(this.asyncDataProperty)
     // console.info(this.normalDataProperty)
-  },
+  }
 })
 </script>

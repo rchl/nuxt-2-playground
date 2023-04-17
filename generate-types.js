@@ -1,16 +1,42 @@
+const path = require('path')
+const ts = require('typescript')
+const volar = require('@volar/language-core')
+const snapshotToMirrorMappings = new WeakMap()
+
 /** @type {import('@volar/language-core').LanguageModule} */
 module.exports = {
-  createFile () {
-    return undefined
+  createFile (fileName, snapshot) {
+    if (fileName.endsWith('/generated-component-types.d.ts')) {
+      return {
+        fileName,
+        snapshot,
+        capabilities: {},
+        embeddedFiles: [],
+        kind: volar.FileKind.TypeScriptHostFile,
+        mappings: [{
+          data: {},
+          sourceRange: [0, snapshot.getLength()],
+          generatedRange: [0, snapshot.getLength()]
+        }],
+        mirrorBehaviorMappings: snapshotToMirrorMappings.get(snapshot)
+      }
+    }
   },
-  updateFile () {},
+  updateFile (file, newSnapshot) {
+    file.snapshot = newSnapshot
+    file.mappings = [{
+      data: {},
+      sourceRange: [0, newSnapshot.getLength()],
+      generatedRange: [0, newSnapshot.getLength()]
+    }]
+    file.mirrorBehaviorMappings = snapshotToMirrorMappings.get(newSnapshot)
+  },
   proxyLanguageServiceHost (host) {
-    const ts = host.getTypeScriptModule()
     const vueTypesScript = {
       projectVersion: '',
       fileName: `${host.getCurrentDirectory()}/generated-component-types.d.ts`,
       _version: 0,
-      _snapshot: ts?.ScriptSnapshot.fromString(''),
+      _snapshot: ts.ScriptSnapshot.fromString(''),
       get version () {
         this.update()
         return this._version
@@ -25,37 +51,41 @@ module.exports = {
         }
         if (!host.getProjectVersion || host.getProjectVersion() !== this.projectVersion) {
           this.projectVersion = host.getProjectVersion?.() ?? ''
-          const newText = this.generateText()
+          const [newText, mirrorMappings] = this.generateText()
           if (newText !== this._snapshot.getText(0, this._snapshot.getLength())) {
             this._version++
-            this._snapshot = ts?.ScriptSnapshot.fromString(newText)
+            this._snapshot = ts.ScriptSnapshot.fromString(newText)
+            snapshotToMirrorMappings.set(this._snapshot, mirrorMappings)
           }
         }
       },
       generateText () {
-        const projectFileNames = host.getScriptFileNames().map(fileName => fileName.replace(`${host.getCurrentDirectory()}/`, ''))
-        const vueFiles = projectFileNames.filter(fileName => (fileName.startsWith('pages/') || fileName.startsWith('components/')) && fileName.endsWith('.vue'))
-        const components = vueFiles
-          .map((path) => {
-            const filename = path.split('/').pop()
-            if (!filename) {
-              return ''
-            }
-            const [basename, _] = filename.split('.')
-            return {
-              name: basename,
-              path
-            }
-          })
-          .filter(Boolean)
-        return `
-declare module '@vue/runtime-core' {
-    export interface GlobalComponents {
-        ${components.map(component => `${component.name}: typeof import('${component.path}').default`).join(('\n'))}
-        ${components.map(component => `Lazy${component.name}: typeof import('${component.path}').default`).join(('\n'))}
-    }
-}
-`
+        const mirrorMappings = []
+        let code = ''
+        code += 'import { DefineComponent } from \'vue\'\n'
+        code += 'import { RouterLinkProps } from \'vue-router/types/router\'\n'
+        code += 'declare module \'@vue/runtime-core\' {\n'
+        code += 'export interface GlobalComponents {\n'
+        code += 'NuxtLink: DefineComponent<RouterLinkProps>;\n'
+        for (const fileName of host.getScriptFileNames()) {
+          if (fileName.endsWith('.vue')) {
+            const dirName = path.dirname(fileName)
+            const baseName = path.basename(fileName)
+            const componentName = baseName.replace('.vue', '')
+            const left = [code.length, code.length + componentName.length]
+            code += `${componentName}: typeof import('./${path.relative(host.getCurrentDirectory(), dirName)}/`
+            const right = [code.length, code.length + baseName.length]
+            code += `${baseName}').default;\n`
+            mirrorMappings.push({
+              data: [volar.MirrorBehaviorCapabilities.full, volar.MirrorBehaviorCapabilities.full],
+              sourceRange: left,
+              generatedRange: right
+            })
+          }
+        }
+        code += '}\n'
+        code += '}\n'
+        return [code, mirrorMappings]
       }
     }
 

@@ -12,7 +12,7 @@ export default defineComponent({
   props: {
     arrayProp: {
       type: Array as PropType<number[]>,
-      default: []
+      default: () => []
     }
   },
   asyncData (context) {
@@ -25,14 +25,14 @@ export default defineComponent({
       normalDataProperty: 123
     }
   },
+  computed: {
+    arrayProperty (): number[] {
+      return this.arrayProp
+    }
+  },
   created () {
     // console.info(this.asyncDataProperty)
     console.info(this.normalDataProperty)
-  },
-  computed: {
-    arrayProperty(): number[] {
-      return this.arrayProp
-    }
   }
 })
 </script>
