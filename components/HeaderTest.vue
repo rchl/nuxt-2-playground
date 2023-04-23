@@ -10,6 +10,12 @@
 import { defineComponent } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  props: {
+    something: {
+      type: Number,
+      default: 1
+    }
+  },
   setup () {
     return {
       data: {

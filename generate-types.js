@@ -53,6 +53,7 @@ module.exports = {
           this.projectVersion = host.getProjectVersion?.() ?? ''
           const [newText, mirrorMappings] = this.generateText()
           if (newText !== this._snapshot.getText(0, this._snapshot.getLength())) {
+            // console.error(newText)
             this._version++
             this._snapshot = ts.ScriptSnapshot.fromString(newText)
             snapshotToMirrorMappings.set(this._snapshot, mirrorMappings)
@@ -63,19 +64,21 @@ module.exports = {
         const mirrorMappings = []
         let code = ''
         code += 'import { DefineComponent } from \'vue\'\n'
+        code += 'import { ComponentOptionsMixin, ComputedOptions, MethodOptions } from \'vue/types/v3-component-options\'\n'
+        code += 'import { ExtractDefaultPropTypes, ExtractPropTypes } from \'vue/types/v3-component-props\'\n'
         code += 'import { RouterLinkProps } from \'vue-router/types/router\'\n'
-        code += 'declare module \'@vue/runtime-core\' {\n'
+        code += 'declare module \'vue\' {\n'
         code += 'export interface GlobalComponents {\n'
-        code += 'NuxtLink: DefineComponent<RouterLinkProps>;\n'
+        code += 'NuxtLink: DefineComponent<RouterLinkProps, {}, {}, ComputedOptions, MethodOptions, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, Readonly<ExtractPropTypes<RouterLinkProps>>, ExtractDefaultPropTypes<RouterLinkProps>>\n'
         for (const fileName of host.getScriptFileNames()) {
-          if (fileName.endsWith('.vue')) {
+          if (fileName.endsWith('.vue') && fileName.includes('/components/')) {
             const dirName = path.dirname(fileName)
             const baseName = path.basename(fileName)
             const componentName = baseName.replace('.vue', '')
             const left = [code.length, code.length + componentName.length]
             code += `${componentName}: typeof import('./${path.relative(host.getCurrentDirectory(), dirName)}/`
             const right = [code.length, code.length + baseName.length]
-            code += `${baseName}').default;\n`
+            code += `${baseName}').default\n`
             mirrorMappings.push({
               data: [volar.MirrorBehaviorCapabilities.full, volar.MirrorBehaviorCapabilities.full],
               sourceRange: left,
