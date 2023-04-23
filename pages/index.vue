@@ -1,16 +1,20 @@
 <template>
   <div>
-    <HeaderTest />
+    <HeaderTest key="abc" />
+    <span key="x">xx</span>
     <options :array-prop="[1]" />
-    index
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import HeaderTest from '~/components/HeaderTest.vue'
 
 export default defineComponent({
   name: 'IndexPage',
+  components: {
+    HeaderTest
+  },
   asyncData (/* context */) {
     return {
       asyncDataProperty: 'abc'

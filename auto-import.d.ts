@@ -1,22 +1,24 @@
-import { DefineComponent } from 'vue'
-import { RouterLinkProps } from 'vue-router/types/router'
+// import { DefineComponent } from 'vue'
+// import { ComponentOptionsMixin, ComputedOptions, MethodOptions } from 'vue/types/v3-component-options'
+// import { ExtractDefaultPropTypes, ExtractPropTypes } from 'vue/types/v3-component-props'
+// import { RouterLinkProps } from 'vue-router/types/router'
 
-declare module '@vue/runtime-core' {
-  export interface GlobalComponents {
-    // NuxtLink: DefineComponent<RouterLinkProps>;
-    // indexWithObjectProps: typeof import('pages/indexWithObjectProps.vue').default;
-    // indexWithArrayProps: typeof import('pages/indexWithArrayProps.vue').default;
-    // indexJs: typeof import('pages/indexJs.vue').default;
-    // index: typeof import('pages/index.vue').default;
-    // compositionApi: typeof import('pages/compositionApi.vue').default;
-    // options: typeof import('components/options.vue').default;
-    // HeaderTest: typeof import('./components/HeaderTest.vue').default;
-    // LazyHeader: typeof import('components/Header.vue').default;
-    // Lazyoptions: typeof import('components/options.vue').default;
-    // LazycompositionApi: typeof import('pages/compositionApi.vue').default;
-    // Lazyindex: typeof import('pages/index.vue').default;
-    // LazyindexJs: typeof import('pages/indexJs.vue').default;
-    // LazyindexWithArrayProps: typeof import('pages/indexWithArrayProps.vue').default;
-    // LazyindexWithObjectProps: typeof import('pages/indexWithObjectProps.vue').default;
-  }
-}
+// declare module 'vue' {
+//     export interface GlobalComponents {
+//         NuxtLink: DefineComponent<
+//             RouterLinkProps,
+//             {},
+//             {},
+//             ComputedOptions,
+//             MethodOptions,
+//             ComponentOptionsMixin,
+//             ComponentOptionsMixin,
+//             {},
+//             string,
+//             Readonly<ExtractPropTypes<RouterLinkProps>>,
+//             ExtractDefaultPropTypes<RouterLinkProps>
+//         >;
+//         // HeaderTest: typeof import('./components/HeaderTest.vue').default;
+//         // options: typeof import('./components/options.vue').default;
+//     }
+// }
