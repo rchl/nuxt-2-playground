@@ -1,51 +1,51 @@
 <template>
-  <div>
-    <button disabled />
-    {{ arrayPropertyGetter }}
-    {{ boolPropertyGetter }}
-    {{ normalDataProperty }}
-    {{ asyncDataProperty }}
-  </div>
+    <div>
+        <button disabled></button>
+        {{ arrayPropertyGetter }}
+        {{ boolPropertyGetter }}
+        {{ normalDataProperty }}
+        {{ asyncDataProperty }}
+    </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
-  name: 'IndexWithObjectProps',
-  props: {
-    arrayProperty: {
-      type: Array as PropType<number[]>,
-      default: () => []
+    name: 'IndexWithObjectProps',
+    props: {
+        arrayProperty: {
+            type: Array as PropType<number[]>,
+            default: () => [],
+        },
+        boolProperty: {
+            type: Boolean,
+            required: true,
+        },
     },
-    boolProperty: {
-      type: Boolean,
-      required: true
-    }
-  },
-  asyncData (context) {
-    return {
-      asyncDataProperty: context.base
-    }
-  },
-  data () {
-    return {
-      normalDataProperty: 123
-    }
-  },
-  computed: {
-    arrayPropertyGetter (): number[] {
-      return this.arrayProperty
+    asyncData(context) {
+        return {
+            asyncDataProperty: context.base,
+        }
     },
-    boolPropertyGetter (): boolean {
-      return this.boolProperty
+    data() {
+        return {
+            normalDataProperty: 123,
+        }
     },
-    dataProperty (): number {
-      return this.normalDataProperty
+    computed: {
+        arrayPropertyGetter(): number[] {
+            return this.arrayProperty
+        },
+        boolPropertyGetter(): boolean {
+            return this.boolProperty
+        },
+        dataProperty(): number {
+            return this.normalDataProperty
+        },
+        asyncProperty(): string {
+            return this.asyncDataProperty
+        },
     },
-    asyncProperty (): string {
-      return this.asyncDataProperty
-    }
-  }
 })
 </script>

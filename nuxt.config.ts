@@ -1,4 +1,4 @@
-import type { NuxtConfig } from '@nuxt/types'
+import type { NuxtConfig } from '@nuxt/types';
 
 // import consola, { JSONReporter } from 'consola'
 // consola.setReporters([
@@ -6,42 +6,42 @@ import type { NuxtConfig } from '@nuxt/types'
 // ])
 
 const config: NuxtConfig = {
-  server: {
-    port: 9000
-  },
+    server: {
+        port: 9000,
+    },
 
-  components: true,
+    components: true,
 
-  // This should be typed properly.
-  sentry: {
-    dsn: '123',
-    config: {
-      debug: true
-    }
-  },
+    // This should be typed properly.
+    sentry: {
+        dsn: '123',
+        config: {
+            debug: true,
+        },
+    },
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
+    // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
+    buildModules: [
     // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    '@nuxtjs/composition-api/module'
-  ],
+        '@nuxt/typescript-build',
+        '@nuxtjs/composition-api/module',
+    ],
 
-  modules: [
-    '@nuxtjs/axios'
-  ],
+    modules: [
+        '@nuxtjs/axios',
+    ],
 
-  plugins: [
+    plugins: [
     // '~/plugins/test-axios.ts'
-  ],
+    ],
 
-  serverMiddleware: [
+    serverMiddleware: [
     // '~/api/test.ts'
-  ],
+    ],
 
-  typescript: {
+    typescript: {
     // typeCheck: false
-  }
-}
+    },
+};
 
-export default config
+export default config;
