@@ -29,7 +29,6 @@
       "@nuxt/types",
       "@nuxt/typescript-build",
       "@nuxtjs/axios",
-      "@nuxtjs/sentry",
       "@types/node",
     ]
   },
@@ -48,6 +47,6 @@
   "vueCompilerOptions": {
     "target": 2.7,
     "strictTemplates": true,
-    // "experimentalAdditionalLanguageModules": ["./generate-types.js"]
+    "experimentalAdditionalLanguageModules": ["./generate-types.js"]
   }
 }
