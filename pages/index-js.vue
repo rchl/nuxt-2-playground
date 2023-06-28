@@ -1,5 +1,6 @@
 <template>
     <div>
+        <header-test key="abc" />
         Foo
         {{ normalDataProperty }}
     </div>
