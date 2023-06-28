@@ -10,13 +10,6 @@
 import { defineComponent } from 'vue'
 import HeaderTest from '~/components/HeaderTest.vue'
 
-const CUSTOM_OBJ: MyCustomType = {
-    foo: 'string',
-    bar: null,
-};
-
-console.info(CUSTOM_OBJ)
-
 export default defineComponent({
     name: 'IndexPage',
     components: {
@@ -38,8 +31,8 @@ export default defineComponent({
         }
     },
     created() {
-    // console.info(this.asyncDataProperty)
-    // console.info(this.normalDataProperty)
+        // console.info(this.asyncDataProperty)
+        // console.info(this.normalDataProperty)
     },
 })
 </script>

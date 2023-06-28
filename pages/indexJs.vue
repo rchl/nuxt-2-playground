@@ -9,7 +9,7 @@ import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'IndexPage',
-    asyncData(context) {
+    asyncData() {
         return {
             asyncDataProperty: 'abc',
         }

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, useMeta, PropType, computed } from '@nuxtjs/composition-api'
+import { defineComponent, PropType, computed } from 'vue'
 
 export default defineComponent({
     name: 'IndexWithArrayProps',
@@ -17,13 +17,6 @@ export default defineComponent({
     },
 
     setup(props) {
-        useMeta({
-            title: 'heyho',
-            meta: [
-                { name: 'robots', content: 'noindex', hid: 'abc' },
-            ],
-        })
-
         const arrayProperty = computed(() => props.arrayProp)
 
         return {

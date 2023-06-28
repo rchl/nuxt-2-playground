@@ -15,7 +15,7 @@ export default defineComponent({
             default: () => [],
         },
     },
-    asyncData(context) {
+    asyncData() {
         return {
             asyncDataProperty: 'abc',
         }

@@ -25,7 +25,6 @@
       ]
     },
     "types": [
-      "./auto-import.d.ts",
       "@nuxt/types",
       "@nuxt/typescript-build",
       "@nuxtjs/axios",
@@ -33,7 +32,6 @@
     ]
   },
   "include": [
-    "./auto-import.d.ts",
     "nuxt.config.ts",
     "components/**/*",
     "pages/**/*",
@@ -47,6 +45,6 @@
   "vueCompilerOptions": {
     "target": 2.7,
     "strictTemplates": true,
-    "experimentalAdditionalLanguageModules": ["./generate-types.js"]
+    // "experimentalAdditionalLanguageModules": ["./modules/volar-component-types/volar-module.js"],
   }
 }
