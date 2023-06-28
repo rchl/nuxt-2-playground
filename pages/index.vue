@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header-test key="abc" />
+        <header-test key="abc" :something="1" />
         <span key="x">xx</span>
         <options :array-prop="[1]" />
         <nuxt-link to="/indexJs">indexJs</nuxt-link>

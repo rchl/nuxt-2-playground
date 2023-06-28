@@ -7,7 +7,9 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue'
+
+export default defineComponent({
     name: 'IndexPage',
     asyncData(/* { $axios } */) {
         // const response = await $axios.get('http://tidal.com')
@@ -28,7 +30,7 @@ export default {
         }
     },
     created() {
-    // console.info(this.asyncDataProperty)
+        // console.info(this.asyncDataProperty)
     },
-}
+})
 </script>

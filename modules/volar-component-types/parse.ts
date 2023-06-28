@@ -1,8 +1,6 @@
 import { parse } from '@babel/parser';
 import traverse from '@babel/traverse';
-
-type Range = readonly [number, number];
-export type RangeMapping = readonly [Range, Range];
+import type { RangeMapping } from './types'
 
 export function parseLocationMappings(code: string): RangeMapping[] {
     const ast = parse(code, {

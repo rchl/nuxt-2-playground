@@ -1,7 +1,7 @@
 import path from 'upath';
 import { Module } from '@nuxt/types';
-import { parseLocationMappings, type SourceLocationMapping } from './parse';
-import type { ComponentDefinition } from './types';
+import { parseLocationMappings } from './parse';
+import type { ComponentDefinition, RangeMapping } from './types';
 
 export default <Module> function VolarComponentTypesModule() {
     const { nuxt } = this;
@@ -48,7 +48,7 @@ function indent(level: number, code: string): string {
         .join('\n');
 }
 
-function generateComponentTypes(components: ComponentDefinition[], rootDir: string): [string, SourceLocationMapping[]] {
+function generateComponentTypes(components: ComponentDefinition[], rootDir: string): [string, RangeMapping[]] {
     const definitions = components
         .map(component => `${component.pascalName}: typeof import('./${path.relative(rootDir, component.filePath)}').default;`)
         .join('\n');

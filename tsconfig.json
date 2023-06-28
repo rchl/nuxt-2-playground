@@ -33,8 +33,10 @@
   },
   "include": [
     "nuxt.config.ts",
+    "modules/**/*.ts",
+    "modules/**/*.js",
     "components/**/*",
-    "pages/**/*",
+    "pages/**/*.vue",
     "types/**/*",
   ],
   "exclude": [
@@ -45,6 +47,6 @@
   "vueCompilerOptions": {
     "target": 2.7,
     "strictTemplates": true,
-    // "experimentalAdditionalLanguageModules": ["./modules/volar-component-types/volar-module.js"],
+    "experimentalAdditionalLanguageModules": ["./modules/volar-component-types/dist/volar-module.js"],
   }
 }

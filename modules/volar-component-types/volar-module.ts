@@ -1,50 +1,54 @@
-const fs = require('fs');
-const ts = require('typescript');
-const volar = require('@volar/language-core');
+import path from 'path';
+import fs from 'fs';
+import * as ts from 'typescript';
+import * as volar from '@volar/language-core';
+import { type RangeMapping } from './types';
+
 const snapshotToMirrorMappings = new WeakMap();
 
-function readComponentTypes(hostDirectory) {
+function readComponentTypes(hostDirectory: string): { code: string; mappings: RangeMapping[] } {
     const componentDataFile = `${hostDirectory}/.nuxt/components/volar-component-data.json`;
+
     try {
         return JSON.parse(fs.readFileSync(componentDataFile, { encoding: 'utf-8' }));
     } catch (error) {
-        console.error(error.message);
+        console.error((error as Error).message);
         return { code: '', mappings: [] };
     }
 }
 
-/** @type {import('@volar/language-core').LanguageModule} */
-module.exports = {
-    createFile(fileName, snapshot) {
+const languageModule: volar.Language = {
+    createVirtualFile(fileName, snapshot, _languageId) {
         if (fileName.endsWith('/generated-component-types.d.ts')) {
             return {
                 fileName,
                 snapshot,
+                kind: volar.FileKind.TypeScriptHostFile,
                 capabilities: {},
                 embeddedFiles: [],
-                kind: volar.FileKind.TypeScriptHostFile,
                 mappings: [{
                     data: {},
                     sourceRange: [0, snapshot.getLength()],
                     generatedRange: [0, snapshot.getLength()],
                 }],
+                codegenStacks: [],
                 mirrorBehaviorMappings: snapshotToMirrorMappings.get(snapshot),
             };
         }
     },
-    updateFile(file, newSnapshot) {
-        file.snapshot = newSnapshot;
+    updateVirtualFile(file, snapshot) {
+        file.snapshot = snapshot;
         file.mappings = [{
             data: {},
-            sourceRange: [0, newSnapshot.getLength()],
-            generatedRange: [0, newSnapshot.getLength()],
+            sourceRange: [0, snapshot.getLength()],
+            generatedRange: [0, snapshot.getLength()],
         }];
-        file.mirrorBehaviorMappings = snapshotToMirrorMappings.get(newSnapshot);
+        file.mirrorBehaviorMappings = snapshotToMirrorMappings.get(snapshot);
     },
-    proxyLanguageServiceHost(host) {
+    resolveHost(host) {
         const vueTypesScript = {
-            projectVersion: '',
-            fileName: host.getCurrentDirectory() + '/generated-component-types.d.ts',
+            projectVersion: '' as string | number,
+            fileName: path.join(host.getCurrentDirectory(), 'generated-component-types.d.ts'),
             _version: 0,
             _snapshot: ts.ScriptSnapshot.fromString(''),
             get version() {
@@ -60,7 +64,7 @@ module.exports = {
                     return;
                 }
                 if (!host.getProjectVersion || host.getProjectVersion() !== this.projectVersion) {
-                    this.projectVersion = host.getProjectVersion?.() ?? '';
+                    this.projectVersion = host.getProjectVersion();
                     const { code, mirrorMappings } = this.generateCodeAndMappings();
                     if (code !== this._snapshot.getText(0, this._snapshot.getLength())) {
                         // console.error(code);
@@ -84,17 +88,12 @@ module.exports = {
         };
 
         return {
+            ...host,
             getScriptFileNames() {
                 return [
                     ...host.getScriptFileNames(),
                     vueTypesScript.fileName,
                 ];
-            },
-            getScriptVersion(fileName) {
-                if (fileName === vueTypesScript.fileName) {
-                    return String(vueTypesScript.version);
-                }
-                return host.getScriptVersion(fileName);
             },
             getScriptSnapshot(fileName) {
                 if (fileName === vueTypesScript.fileName) {
@@ -105,3 +104,6 @@ module.exports = {
         };
     },
 };
+
+// Not a "export default" so that it compiles to "module.exports".
+export = languageModule
