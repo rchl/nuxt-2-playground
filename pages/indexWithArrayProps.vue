@@ -12,7 +12,11 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     name: 'IndexWithArrayProps',
     props: ['boolProp'],
-    asyncData(context) {
+    async asyncData(context) {
+        const { route } = context
+        await new Promise(resolve => setTimeout(resolve, 3000))
+        console.info('Hey', route)
+        context.error({ message: 'Not found' })
         return {
             asyncDataProperty: context.base,
         }

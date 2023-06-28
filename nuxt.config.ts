@@ -10,6 +10,12 @@ const config: NuxtConfig = {
         port: 9000,
     },
 
+    build: {
+        transpile: [
+            '/crypto-js/',
+        ],
+    },
+
     components: true,
 
     // This should be typed properly.

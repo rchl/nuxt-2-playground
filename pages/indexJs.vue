@@ -1,5 +1,6 @@
 <template>
     <div>
+        <nuxt-link to="/indexWithArrayProps">indexWithArrayProps</nuxt-link>
         {{ asyncDataProperty }}
     </div>
 </template>
@@ -20,8 +21,8 @@ export default defineComponent({
         }
     },
     created() {
-        console.info(this.asyncDataProperty)
-        console.info(this.normalDataProperty)
+        // console.info(this.asyncDataProperty)
+        // console.info(this.normalDataProperty)
     },
 })
 </script>

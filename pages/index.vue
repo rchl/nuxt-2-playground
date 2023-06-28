@@ -3,6 +3,7 @@
         <header-test key="abc" />
         <span key="x">xx</span>
         <options :array-prop="[1]" />
+        <nuxt-link to="/indexJs">indexJs</nuxt-link>
     </div>
 </template>
 
