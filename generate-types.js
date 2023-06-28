@@ -1,7 +1,11 @@
-const path = require('path');
 const ts = require('typescript');
+const path = require('path');
 const volar = require('@volar/language-core');
 const snapshotToMirrorMappings = new WeakMap();
+
+function toCamelCase(str) {
+    return str.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+}
 
 /** @type {import('@volar/language-core').LanguageModule} */
 module.exports = {
@@ -34,7 +38,7 @@ module.exports = {
     proxyLanguageServiceHost(host) {
         const vueTypesScript = {
             projectVersion: '',
-            fileName: `${host.getCurrentDirectory()}/generated-component-types.d.ts`,
+            fileName: host.getCurrentDirectory() + '/generated-component-types.d.ts',
             _version: 0,
             _snapshot: ts.ScriptSnapshot.fromString(''),
             get version() {
@@ -53,7 +57,7 @@ module.exports = {
                     this.projectVersion = host.getProjectVersion?.() ?? '';
                     const [newText, mirrorMappings] = this.generateText();
                     if (newText !== this._snapshot.getText(0, this._snapshot.getLength())) {
-                        // console.error(newText)
+                        console.error(newText);
                         this._version++;
                         this._snapshot = ts.ScriptSnapshot.fromString(newText);
                         snapshotToMirrorMappings.set(this._snapshot, mirrorMappings);
@@ -63,31 +67,32 @@ module.exports = {
             generateText() {
                 const mirrorMappings = [];
                 let code = '';
-                code += 'import { DefineComponent } from \'vue\'\n';
-                code += 'import { ComponentOptionsMixin, ComputedOptions, MethodOptions } from \'vue/types/v3-component-options\'\n';
-                code += 'import { ExtractDefaultPropTypes, ExtractPropTypes } from \'vue/types/v3-component-props\'\n';
-                code += 'import { RouterLinkProps } from \'vue-router/types/router\'\n';
+                code += 'import \'vue\'\n';
                 code += 'declare module \'vue\' {\n';
                 code += 'export interface GlobalComponents {\n';
-                code += 'NuxtLink: DefineComponent<RouterLinkProps, {}, {}, ComputedOptions, MethodOptions, ComponentOptionsMixin, ComponentOptionsMixin, {}, string, Readonly<ExtractPropTypes<RouterLinkProps>>, ExtractDefaultPropTypes<RouterLinkProps>>\n';
                 for (const fileName of host.getScriptFileNames()) {
-                    if (fileName.endsWith('.vue') && fileName.includes('/components/')) {
-                        const dirName = path.dirname(fileName);
-                        const baseName = path.basename(fileName);
-                        const componentName = baseName.replace('.vue', '');
-                        const left = [code.length, code.length + componentName.length];
-                        code += `${componentName}: typeof import('./${path.relative(host.getCurrentDirectory(), dirName)}/`;
-                        const right = [code.length, code.length + baseName.length];
-                        code += `${baseName}').default\n`;
-                        mirrorMappings.push({
-                            data: [volar.MirrorBehaviorCapabilities.full, volar.MirrorBehaviorCapabilities.full],
-                            sourceRange: left,
-                            generatedRange: right,
-                        });
+                    if (!fileName.endsWith('.vue') || !fileName.includes('/components/')) {
+                        continue;
                     }
+
+                    const dirName = path.dirname(fileName);
+                    const relativePath = path.relative(host.getCurrentDirectory(), dirName);
+                    const baseName = path.basename(fileName);
+                    // const componentName = baseName.replace('.vue', '');
+                    const componentName = toCamelCase(baseName.replace('.vue', ''));
+                    const left = [code.length, code.length + componentName.length];
+                    code += `${componentName}: typeof import('./${relativePath}/`;
+                    const right = [code.length, code.length + baseName.length];
+                    code += `${baseName}').default;\n`;
+                    mirrorMappings.push({
+                        data: [volar.MirrorBehaviorCapabilities.full, volar.MirrorBehaviorCapabilities.full],
+                        sourceRange: left,
+                        generatedRange: right,
+                    });
                 }
                 code += '}\n';
                 code += '}\n';
+                // code += 'export { };\n';
                 return [code, mirrorMappings];
             },
         };
