@@ -47,6 +47,6 @@
   "vueCompilerOptions": {
     "target": 2.7,
     "strictTemplates": true,
-    "experimentalAdditionalLanguageModules": ["./modules/volar-component-types/dist/volar-module.js"],
+    "experimentalAdditionalLanguageModules": ["volar-component-types"],
   }
 }

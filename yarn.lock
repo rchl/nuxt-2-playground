@@ -8920,6 +8920,16 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+volar-component-types@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/volar-component-types/-/volar-component-types-0.2.1.tgz#8b50a643d921312162cb14cfa54417bb7f0eb601"
+  integrity sha512-XjA/zul8uglg1ZQ9fgcS9ZlV4BlsFVgEmC34ddql+0IeHyUqKEULolSYHSuwKbu6Mu0/rHWEd7VAVo/GCyb2mA==
+  dependencies:
+    "@babel/parser" "^7.22.5"
+    "@babel/traverse" "^7.22.5"
+    "@volar/language-core" "^1.7.10"
+    upath "^2.0.1"
+
 vue-client-only@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-client-only/-/vue-client-only-2.1.0.tgz#1a67a47b8ecacfa86d75830173fffee3bf8a4ee3"
