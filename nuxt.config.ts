@@ -30,7 +30,7 @@ const config: NuxtConfig = {
     buildModules: [
         // https://go.nuxtjs.dev/typescript
         '@nuxt/typescript-build',
-        '~/modules/volar-component-types',
+        'volar-component-types',
     ],
 
     modules: [

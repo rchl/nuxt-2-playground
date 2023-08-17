@@ -19,7 +19,6 @@
   "devDependencies": {
     "@nuxt/types": "^2.17.0",
     "@nuxt/typescript-build": "^3.0.1",
-    "@volar/language-core": "^1.7.10",
     "eslint": "^8.43.0",
     "eslint-config-rchl-typescript": "^1.0.1",
     "eslint-config-rchl-vue": "^1.0.0",
