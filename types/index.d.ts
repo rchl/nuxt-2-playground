@@ -1,8 +1,7 @@
-import './vue'
+// declare global {
+//     type MyCustomType = {
+//         foo: string;
+//         bar?: string;
+//     }
+// }
 
-declare global {
-    type MyCustomType = {
-        foo: string;
-        bar?: string;
-    }
-}

@@ -9,13 +9,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HeaderTest from '~/components/HeaderTest.vue'
 
 export default defineComponent({
     name: 'IndexPage',
-    components: {
-        HeaderTest,
-    },
     asyncData(/* context */) {
         return {
             asyncDataProperty: 'abc',
