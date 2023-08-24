@@ -37,6 +37,8 @@
     "modules/**/*.js",
     "components/**/*",
     "pages/**/*.vue",
+    "pages/**/*.js",
+    "pages/**/*.ts",
     "types/**/*",
   ],
   "exclude": [

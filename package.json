@@ -22,9 +22,9 @@
     "eslint": "^8.47.0",
     "eslint-config-rchl-typescript": "^1.0.1",
     "eslint-config-rchl-vue": "^1.0.0",
-    "sass": "^1.65.1",
-    "typescript": "^5.1.6",
-    "volar-component-types": "^0.2.3",
+    "sass": "^1.66.1",
+    "typescript": "^5.2.2",
+    "volar-component-types": "^0.2.4",
     "vue-global-type-gen": "^1.1.0"
   }
 }
