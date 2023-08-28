@@ -3,6 +3,9 @@ module.exports = {
         'eslint-config-rchl-vue',
         'eslint-config-rchl-typescript',
     ],
+    ignorePatterns: [
+        '**/*.vue.ts',
+    ],
     overrides: [
         {
             files: ['*.ts'],
