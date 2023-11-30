@@ -1,8 +1,8 @@
 <template>
     <div>
-        <header-test key="abc" :something="1" />
+        <header-test :something="1" not-existant />
         <span key="x">xx</span>
-        <options class="22" :array-prop="[1]" />
+        <options :array-prop="[1]" />
         <nuxt-link id="123" to="/indexJs">indexJs</nuxt-link>
     </div>
 </template>

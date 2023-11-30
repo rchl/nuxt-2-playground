@@ -46,7 +46,7 @@ const config: NuxtConfig = {
     ],
 
     typescript: {
-    // typeCheck: false
+        typeCheck: false,
     },
 };
 

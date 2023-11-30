@@ -33,13 +33,8 @@
     ]
   },
   "include": [
-    "nuxt.config.ts",
-    "modules/**/*.ts",
-    "modules/**/*.js",
     "components/**/*",
-    "pages/**/*.vue",
-    "pages/**/*.js",
-    "pages/**/*.ts",
+    "pages/**/*",
     "types/**/*",
     "*.ts",
   ],
